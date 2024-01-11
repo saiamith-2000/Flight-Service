@@ -17,8 +17,7 @@ module.exports = {
         table:'cities',
         field:'id',
        },
-       onUpdate:'CASCADE',
-       onDELETE:'CASCADE'
+       onDelete:'CASCADE'
      });
 
   },
@@ -36,6 +35,8 @@ module.exports = {
 
 
 /*
+Query to check if two keys are tied
+*
 SELECT 
   TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME
 FROM
