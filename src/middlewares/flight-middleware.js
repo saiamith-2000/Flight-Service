@@ -54,10 +54,15 @@ if(!compareTime(req.body.arrivalTime,req.body.departureTime)){
 }
 
 function validateUpdateRequest(req,res,next){
-    if(!req.body.name && !req.body.code && !req.body.cityId){
+    if(!req.body.flightNumber || !req.body.airplaneId || !req.body.arrivalAirportId || !req.body.departureAirportId || !req.body.arrivalTime || !req.body.departureTime || !req.body.price || !req.body.totalSeats){
         ErrorResponse.message="Something went wrong while updating Airport";
-        ErrorResponse.error=new AppError(['Name,Code and City Id not found in incoming form'],StatusCodes.BAD_REQUEST);
+        ErrorResponse.error=new AppError([' Incoming form violates data entry pattern'],StatusCodes.BAD_REQUEST);
         return res.status(StatusCodes.BAD_REQUEST).json({ErrorResponse});
+  }
+  if(!compareTime(req.body.arrivalTime,req.body.departureTime)){
+    ErrorResponse.message="Something went wrong while updating flight";
+    ErrorResponse.error=new AppError(['Arrival time should be greater than departure time'],StatusCodes.BAD_REQUEST);
+    return res.status(StatusCodes.BAD_REQUEST).json({ErrorResponse});
   }
   next();
 }

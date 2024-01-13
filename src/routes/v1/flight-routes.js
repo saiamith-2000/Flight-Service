@@ -10,6 +10,9 @@ router.post('/',
 FlightMiddlewares.validateCreateRequest,
 FlightController.createFlight);
 
+router.get('/',
+FlightController.getAllFlights);
+
 
 router.patch('/:id',
 FlightMiddlewares.validateUpdateRequest,
