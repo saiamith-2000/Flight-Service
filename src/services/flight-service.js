@@ -55,9 +55,9 @@ async function getAllFlights(query){
          customFilter.arrivalAirportId=arrivalAirportId;
     }
     if(query.price){
-        [minPrice,maxPrice]=query.price.split("-");
+        [minPrice,maxPrice=2000]=query.price.split("-");
         customFilter.price={
-            [Op.between]: [minPrice,((maxPrice==undefined)?2000:maxPrice)]
+            [Op.between]: [minPrice,maxPrice]
         }
     }
     if(query.travellers){
@@ -79,6 +79,7 @@ async function getAllFlights(query){
         const flights=await flightRepository.getAllFlights(customFilter,sortFilter);
         return flights;   
     } catch (error) {
+        console.log(error);
         throw new AppError('Can\'t fetch data of all flights',StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }

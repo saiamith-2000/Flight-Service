@@ -11,52 +11,55 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      this.belongsTo(models.Airplane,{
-        foreignKey:'airplaneId',
-       });
-       this.belongsTo(models.Airport,{
-        foreignKey:'departureAirportId',
-       });
-       this.belongsTo(models.Airport,{
-        foreignKey:'arrivalAirportId',
-       });
+      this.belongsTo(models.Airplane, {
+        foreignKey: 'airplaneId',
+        as: 'airplaneDetail'
+      });
+      this.belongsTo(models.Airport, {
+        foreignKey: 'departureAirportId',
+        as: 'departureAirport',
+      });
+      this.belongsTo(models.Airport, {
+        foreignKey: 'arrivalAirportId',
+        as: 'arrivalAirport',
+      });
     }
   }
   Flight.init({
-    flightNumber:{
-      type:DataTypes.STRING,
-      allowNull:false,
+    flightNumber: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    airplaneId:{
-      type:DataTypes.INTEGER,
-      allowNull:false,
+    airplaneId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
-    departureAirportId:{
-      type:DataTypes.STRING,
-      allowNull:false,
+    departureAirportId: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    arrivalAirportId:{
-      type:DataTypes.STRING,
-      allowNull:false,
+    arrivalAirportId: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
-    arrivalTime:{
-      type:DataTypes.DATE,
-      allowNull:false,
+    arrivalTime: {
+      type: DataTypes.DATE,
+      allowNull: false
     },
-    departureTime:{
-      type:DataTypes.DATE,
-      allowNull:false,
+    departureTime: {
+      type: DataTypes.DATE,
+      allowNull: false
     },
-    price:{
-      type:DataTypes.INTEGER,
-      allowNull:false,
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
-    boardingGate:{
-      type:DataTypes.STRING,
+    boardingGate: {
+      type: DataTypes.STRING
     },
-    totalSeats:{
-      type:DataTypes.INTEGER,
-      allowNull:false,
+    totalSeats: { // total remaining seats
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
   }, {
     sequelize,
