@@ -54,6 +54,16 @@ async function getFlight(id){
     }
 }
 
+async function updateSeats(data){
+    try {
+        const response=await flightRepository.updateRemainingSeats(data.flightId,data.seats,data.dec);
+        return response;
+    } catch (error) {
+        console.log(error);
+        throw new AppError('Can\'t update the data of the flight',StatusCodes.INTERNAL_SERVER_ERROR);
+    }
+}
+
 async function getAllFlights(query){
     let customFilter={};
     let sortFilter={};
@@ -91,7 +101,6 @@ async function getAllFlights(query){
         const flights=await flightRepository.getAllFlights(customFilter,sortFilter);
         return flights;   
     } catch (error) {
-        console.log(error);
         throw new AppError('Can\'t fetch data of all flights',StatusCodes.INTERNAL_SERVER_ERROR);
     }
 }
@@ -100,5 +109,6 @@ module.exports={
     createFlight,
     updateFlight,
     getAllFlights,
-    getFlight
+    getFlight,
+    updateSeats
 }

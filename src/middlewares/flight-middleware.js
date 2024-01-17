@@ -67,7 +67,22 @@ function validateUpdateRequest(req,res,next){
   next();
 }
 
+function validateUpdateSeatsRequest(req,res,next){
+    if(!req.body.flightId){
+        ErrorResponse.message="FlightId not found";
+        ErrorResponse.error=new AppError([' Incoming form violates data entry pattern'],StatusCodes.BAD_REQUEST);
+        return res.status(StatusCodes.BAD_REQUEST).json({ErrorResponse});
+    }
+    if(!req.body.seats){
+        ErrorResponse.message="Seats not found in flight";
+        ErrorResponse.error=new AppError([' Incoming form violates data entry pattern'],StatusCodes.BAD_REQUEST);
+        return res.status(StatusCodes.BAD_REQUEST).json({ErrorResponse});
+    }
+  next();
+}
+
 module.exports={
     validateCreateRequest,
-    validateUpdateRequest
+    validateUpdateRequest,
+    validateUpdateSeatsRequest
 }

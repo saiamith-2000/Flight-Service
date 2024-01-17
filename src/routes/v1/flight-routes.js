@@ -20,5 +20,9 @@ router.patch('/:id',
 FlightMiddlewares.validateUpdateRequest,
 FlightController.updateFlight);
 
+router.patch('/:id/seats',
+FlightMiddlewares.validateUpdateSeatsRequest,
+FlightController.updateSeats);
+
 
 module.exports=router;
