@@ -46,3 +46,24 @@ Lets take a look inside the `src` folder
  ```
  npm run dev
  ```
+
+  Docker setup:
+ ```
+
+ docker build -t flights .
+
+ ```
+ ```
+
+ docker network create micro-net-flights
+
+ ```
+ ```
+ docker volume create flights-modules 
+
+ ```
+ ```
+
+ docker run -it --init -p 3000:3000 --name=flights --network micro-net-flights -v "$(pwd)":/developer/nodejs/flights -v flights-node-modules:/developer/nodejs/flights/node_modules flights:latest 
+
+ ```

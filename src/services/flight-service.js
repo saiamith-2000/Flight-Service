@@ -105,10 +105,23 @@ async function getAllFlights(query){
     }
 }
 
+async function destroyFlight(id){
+    try {
+        const flight=await flightRepository.destroy(id);
+        return flight;
+    } catch (error) {
+        if(error.statusCode==StatusCodes.NOT_FOUND){
+         throw new AppError('Flight requested is not found',StatusCodes.NOT_FOUND);
+        }
+        throw new AppError('Can\'t destry the flight',StatusCodes.BAD_REQUEST);
+    }
+}
+
 module.exports={
     createFlight,
     updateFlight,
     getAllFlights,
     getFlight,
-    updateSeats
+    updateSeats,
+    destroyFlight
 }

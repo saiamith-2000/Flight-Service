@@ -24,5 +24,9 @@ router.patch('/:id/seats',
 FlightMiddlewares.validateUpdateSeatsRequest,
 FlightController.updateSeats);
 
+router.delete('/:id',
+FlightController.destroyFlight
+);
+
 
 module.exports=router;
